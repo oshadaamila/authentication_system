@@ -7,6 +7,7 @@ package authenticationsystem;
 
 import static com.sun.org.apache.xerces.internal.util.FeatureState.is;
 import java.awt.Component;
+import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ComboBoxModel;
@@ -26,14 +27,16 @@ public class Login extends javax.swing.JFrame {
     double[] usertime=new double[26];
     ArrayList<String> users= new ArrayList<String>();
     ArrayList<double[]> patterns =  new ArrayList<double[]>();
+
     
     
     public Login() {
         initComponents();
         jTextArea2.getCaret().deinstall(jTextArea2);
         refreshComboBox();
-        
-        
+        Arrays.fill(keycount,0);
+        Arrays.fill(keytime,0);
+        Arrays.fill(usertime,0);
         
     }
     public void refreshComboBox(){
@@ -236,14 +239,17 @@ public class Login extends javax.swing.JFrame {
         double similarity=0;
         for (int a=0;a<=25;a++){
             double currentAverage=keytime[a]/keycount[a];
-            double difference=savedPattern[a]-currentAverage;
+            double difference=abs(savedPattern[a]-currentAverage);
+            if(Double.toString(difference).equals("NaN")){
+                
+            }else{
             similarity = similarity+difference;
             System.out.println(difference);
-            
+            }
         }
-        System.out.println(similarity);
         Arrays.fill(keytime,0);
         Arrays.fill(keycount,0);
+        System.out.println("Similarity is"+Double.toString(similarity));
     }//GEN-LAST:event_jButton1ActionPerformed
     
     
