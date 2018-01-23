@@ -27,6 +27,7 @@ public class Login extends javax.swing.JFrame {
     double[] usertime=new double[26];
     ArrayList<String> users= new ArrayList<String>();
     ArrayList<double[]> patterns =  new ArrayList<double[]>();
+    ArrayList<Double> averageOfUsers = new ArrayList<Double>();
 
     
     
@@ -102,9 +103,10 @@ public class Login extends javax.swing.JFrame {
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! \"Now fax quiz Jack!\" my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard’s job is to vex chumps quickly in fog. Watch \"Jeopardy!\", Alex Trebek's fun TV quiz game. Woven silk pyjamas exchanged for blue quartz. Brawny gods just");
+        jTextArea2.setText("The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.");
         jTextArea2.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea2);
 
@@ -131,7 +133,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,12 +146,12 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 182, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -162,15 +164,15 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jButton2.getAccessibleContext().setAccessibleName("");
@@ -210,15 +212,16 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jTextField1.getText().equals("")){
             JOptionPane.showMessageDialog(jPanel1, "Please Insert a Username", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println("executed");
         }else{
-        
-        for(int a=0;a<=25;a++){
-            double average = keytime[a]/keycount[a];
-            usertime[a]=average;
+            for(int a=0;a<=25;a++){
+                double average = keytime[a]/keycount[a];
+                usertime[a]=average;
         }
         users.add(jTextField1.getText());
         patterns.add(usertime);
+        printArray(patterns.get(0));
+        averageOfUsers.add(getArrayAverage(usertime));
+        System.out.println("saving Average:"+Double.toString(getArrayAverage(usertime)));
         jTextField1.setText("");
         jTextArea1.setText("");
         for(int a=0;a<=25;a++){
@@ -228,31 +231,54 @@ public class Login extends javax.swing.JFrame {
         refreshComboBox();
         Arrays.fill(keytime,0);
         Arrays.fill(keycount,0);
+        Arrays.fill(usertime,0);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+    }
+    public void printArray(double [] array){
+        for (double a: array){
+            System.out.println("Print Array"+Double.toString(a));
+        }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String loginUser= jComboBox2.getSelectedItem().toString();
         int userIndex= users.indexOf(loginUser);
-        double[] savedPattern = patterns.get(userIndex);
+        printArray(patterns.get(0));
+        double[] savedPattern = patterns.get(0);
+        
         double similarity=0;
         for (int a=0;a<=25;a++){
             double currentAverage=keytime[a]/keycount[a];
+            usertime[a]=currentAverage;
             double difference=abs(savedPattern[a]-currentAverage);
             if(Double.toString(difference).equals("NaN")){
                 
             }else{
             similarity = similarity+difference;
-            System.out.println(difference);
             }
         }
+        double savedUserAverage=averageOfUsers.indexOf(loginUser);
+        double currentUserAverage= getArrayAverage(usertime);
         Arrays.fill(keytime,0);
         Arrays.fill(keycount,0);
+        Arrays.fill(usertime,0);
+        System.out.println("SavedUserAverage:"+Double.toString(savedUserAverage));
+        System.out.println("CurrentUserAverage:"+Double.toString(currentUserAverage));
         System.out.println("Similarity is"+Double.toString(similarity));
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    
+    public double getArrayAverage(double[] array){
+        int numberofnonzeroelements=0;
+        double total=0;
+        for(double a:array){
+            if(a>0){
+                numberofnonzeroelements++;
+                total=total+a;
+            }
+        }
+        double avg = total/numberofnonzeroelements;
+        return avg;
+    }
     /**
      * @param args the command line arguments
      */
