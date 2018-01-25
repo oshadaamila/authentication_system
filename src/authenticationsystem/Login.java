@@ -6,6 +6,7 @@
 package authenticationsystem;
 
 import static com.sun.org.apache.xerces.internal.util.FeatureState.is;
+import java.awt.Color;
 import java.awt.Component;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
@@ -24,10 +25,10 @@ public class Login extends javax.swing.JFrame {
      */
     double[] keycount = new double[26];
     double[] keytime = new double[26];
-    double[] usertime=new double[26];
+    
     ArrayList<String> users= new ArrayList<String>();
     ArrayList<double[]> patterns =  new ArrayList<double[]>();
-    ArrayList<Double> averageOfUsers = new ArrayList<Double>();
+    ArrayList<Double> averagekeyholdingtime= new ArrayList<Double>();
 
     
     
@@ -37,7 +38,6 @@ public class Login extends javax.swing.JFrame {
         refreshComboBox();
         Arrays.fill(keycount,0);
         Arrays.fill(keytime,0);
-        Arrays.fill(usertime,0);
         
     }
     public void refreshComboBox(){
@@ -85,6 +85,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Register");
 
+        jTextArea1.setBackground(new java.awt.Color(102, 255, 102));
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
@@ -96,6 +97,9 @@ public class Login extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextArea1KeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextArea1KeyTyped(evt);
+            }
         });
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -103,10 +107,10 @@ public class Login extends javax.swing.JFrame {
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
+        jTextArea2.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs.");
+        jTextArea2.setText("the quick  brown fox jumps over a lazy dog djs flock by when mtv ax quiz prog junk mtv quiz graced by fox whelps bawds jog flick quartz vex nymphs.");
         jTextArea2.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea2);
 
@@ -133,7 +137,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +150,7 @@ public class Login extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 182, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,14 +169,14 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel4)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton2.getAccessibleContext().setAccessibleName("");
@@ -185,7 +189,9 @@ public class Login extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,6 +199,7 @@ public class Login extends javax.swing.JFrame {
     public double keypressedtime=System.currentTimeMillis();
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyPressed
         // TODO add your handling code here:
+        
         keypressedtime=System.currentTimeMillis();
         //System.out.println(String.valueOf(keypressedtime));
     }//GEN-LAST:event_jTextArea1KeyPressed
@@ -210,18 +217,24 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        double[] usertime=new double[26];
+        double keyholdingaverage=0;
         if(jTextField1.getText().equals("")){
             JOptionPane.showMessageDialog(jPanel1, "Please Insert a Username", "Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("executed");
         }else{
-            for(int a=0;a<=25;a++){
-                double average = keytime[a]/keycount[a];
-                usertime[a]=average;
+        
+        for(int a=0;a<=25;a++){
+            double average = keytime[a]/keycount[a];
+            usertime[a]=average;
+            
         }
+        keyholdingaverage=getArrayAverage(usertime);
         users.add(jTextField1.getText());
+        //double[] usertimetemp = new double[26];
+        //usertimetemp=usertime;
         patterns.add(usertime);
-        printArray(patterns.get(0));
-        averageOfUsers.add(getArrayAverage(usertime));
-        System.out.println("saving Average:"+Double.toString(getArrayAverage(usertime)));
+        averagekeyholdingtime.add(keyholdingaverage);
         jTextField1.setText("");
         jTextArea1.setText("");
         for(int a=0;a<=25;a++){
@@ -231,42 +244,58 @@ public class Login extends javax.swing.JFrame {
         refreshComboBox();
         Arrays.fill(keytime,0);
         Arrays.fill(keycount,0);
-        Arrays.fill(usertime,0);
         
     }//GEN-LAST:event_jButton2ActionPerformed
     }
-    public void printArray(double [] array){
-        for (double a: array){
-            System.out.println("Print Array"+Double.toString(a));
-        }
-    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        double[] usertimes=new double[26];
         String loginUser= jComboBox2.getSelectedItem().toString();
         int userIndex= users.indexOf(loginUser);
-        printArray(patterns.get(0));
-        double[] savedPattern = patterns.get(0);
+        double[] savedPattern = patterns.get(userIndex);
+        double savedholdingtime= averagekeyholdingtime.get(userIndex);
+        /*for(double a:savedPattern){
+            System.out.println("HH"+Double.toString(a));
+        }*/
+        double similarityofholdingtimes=0;
         
+        for(int a=0;a<=25;a++){
+            double average = keytime[a]/keycount[a];
+            usertimes[a]=average;
+            
+        }
+        similarityofholdingtimes=abs(getArrayAverage(usertimes)-savedholdingtime);
         double similarity=0;
         for (int a=0;a<=25;a++){
             double currentAverage=keytime[a]/keycount[a];
-            usertime[a]=currentAverage;
             double difference=abs(savedPattern[a]-currentAverage);
             if(Double.toString(difference).equals("NaN")){
                 
             }else{
             similarity = similarity+difference;
+            System.out.println(difference);
             }
         }
-        double savedUserAverage=averageOfUsers.indexOf(loginUser);
-        double currentUserAverage= getArrayAverage(usertime);
         Arrays.fill(keytime,0);
         Arrays.fill(keycount,0);
-        Arrays.fill(usertime,0);
-        System.out.println("SavedUserAverage:"+Double.toString(savedUserAverage));
-        System.out.println("CurrentUserAverage:"+Double.toString(currentUserAverage));
-        System.out.println("Similarity is"+Double.toString(similarity));
+        System.out.println("Similarity of each key is"+Double.toString(similarity));
+        System.out.println("Similarity of all keys is"+Double.toString(similarityofholdingtimes));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextArea1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyTyped
+        // TODO add your handling code here:
+        String typedtext;
+        String defaulttext;
+        defaulttext=jTextArea2.getText();
+        typedtext=jTextArea1.getText();
+        int length=typedtext.length();
+        if(!typedtext.equalsIgnoreCase(defaulttext.substring(0, length))){
+            jTextArea1.setBackground(Color.red);
+        }else{
+            jTextArea1.setBackground(Color.green);
+        }
+    }//GEN-LAST:event_jTextArea1KeyTyped
+    
     public double getArrayAverage(double[] array){
         int numberofnonzeroelements=0;
         double total=0;
@@ -279,6 +308,7 @@ public class Login extends javax.swing.JFrame {
         double avg = total/numberofnonzeroelements;
         return avg;
     }
+    
     /**
      * @param args the command line arguments
      */
